@@ -14,12 +14,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Jellyfin's FFmpeg
-RUN curl -fsSL https://repo.jellyfin.org/debian/jellyfin_team.gpg.key | gpg --dearmor -o /usr/share/keyrings/jellyfin-archive-keyring.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/jellyfin-archive-keyring.gpg] https://repo.jellyfin.org/debian bullseye main" | tee /etc/apt/sources.list.d/jellyfin.list && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends jellyfin-ffmpeg6 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+#RUN curl -fsSL https://repo.jellyfin.org/debian/jellyfin_team.gpg.key | gpg --dearmor -o /usr/share/keyrings/jellyfin-archive-keyring.gpg && \
+#    echo "deb [signed-by=/usr/share/keyrings/jellyfin-archive-keyring.gpg] https://repo.jellyfin.org/debian bullseye main" | tee /etc/apt/sources.list.d/jellyfin.list && \
+#    apt-get update && \
+#    apt-get install -y --no-install-recommends jellyfin-ffmpeg6 && \
+#    apt-get clean && \
+#    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app/
 
@@ -41,7 +41,7 @@ RUN wget "https://github.com/5rahim/seanime/releases/download/v2.5.1/seanime-2.5
     rm "seanime-2.5.1_Linux_x86_64.tar.gz" && \
     chmod +x seanime
 
-ENV PATH="/usr/lib/jellyfin-ffmpeg/:$PATH"
+#ENV PATH="/usr/lib/jellyfin-ffmpeg/:$PATH"
 
 EXPOSE 80 443 43211 43213 43214 8080 6881 6881/udp 10000
 
@@ -73,8 +73,8 @@ RUN pwd
 #COPY install-tailscale.sh /tmp
 #RUN /tmp/install-tailscale.sh && rm -r /tmp/*
 
-COPY ./app/requirements.txt /app/app/
-RUN pip install --no-cache-dir -r /app/app/requirements.txt
+#COPY ./app/requirements.txt /app/app/
+#RUN pip install --no-cache-dir -r /app/app/requirements.txt
 
 RUN wget https://pkgs.tailscale.com/stable/$(wget -q -O- https://pkgs.tailscale.com/stable/ | grep 'amd64.tgz' | cut -d '"' -f 2) && \
     tar xzf tailscale* --strip-components=1

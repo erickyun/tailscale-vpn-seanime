@@ -1,5 +1,5 @@
 FROM debian:bullseye-slim
-FROM debian:latest
+#FROM debian:latest
 
 # Install necessary packages
 RUN apt-get update && \

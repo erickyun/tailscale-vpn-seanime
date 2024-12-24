@@ -49,29 +49,37 @@ COPY . .
 
 RUN pwd
 
-ARG TAILSCALE_VERSION
-ENV TAILSCALE_VERSION=$TAILSCALE_VERSION
+#ARG TAILSCALE_VERSION
+#ENV TAILSCALE_VERSION=$TAILSCALE_VERSION
 
-RUN apt-get -qq update \
-  && apt-get -qq install --upgrade -y --no-install-recommends \
-    apt-transport-https \
-    ca-certificates \
-    netcat-openbsd \
-    wget \
-    dnsutils \
-  > /dev/null \
-  && apt-get -qq clean \
-  && rm -rf \
-    /var/lib/apt/lists/* \
-    /tmp/* \
-    /var/tmp/* \
-  && :
+#RUN apt-get -qq update \
+#  && apt-get -qq install --upgrade -y --no-install-recommends \
+#    apt-transport-https \
+#    ca-certificates \
+#    netcat-openbsd \
+#    wget \
+#    dnsutils \
+#  > /dev/null \
+#  && apt-get -qq clean \
+#  && rm -rf \
+#    /var/lib/apt/lists/* \
+#    /tmp/* \
+#    /var/tmp/* \
+#  && :
 
-RUN echo "+search +short" > /root/.digrc
-COPY run-tailscale.sh /app/
+#RUN echo "+search +short" > /root/.digrc
+#COPY run-tailscale.sh /app/
 
-COPY install-tailscale.sh /tmp
-RUN /tmp/install-tailscale.sh && rm -r /tmp/*
+#COPY install-tailscale.sh /tmp
+#RUN /tmp/install-tailscale.sh && rm -r /tmp/*
+
+COPY ./app/requirements.txt /app/app/
+RUN pip install --no-cache-dir -r /app/app/requirements.txt
+
+RUN wget https://pkgs.tailscale.com/stable/$(wget -q -O- https://pkgs.tailscale.com/stable/ | grep 'amd64.tgz' | cut -d '"' -f 2) && \
+    tar xzf tailscale* --strip-components=1
+RUN mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
+
 
 # Start Seanime
-CMD ["bash", "-c", "/app/run-tailscale.sh & ./seanime --datadir /app/config/Seanime"]
+CMD ["bash", "-c", "/app/app/start.sh & ./seanime --datadir /app/config/Seanime"]

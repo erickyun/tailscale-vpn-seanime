@@ -74,4 +74,4 @@ COPY install-tailscale.sh /tmp
 RUN /tmp/install-tailscale.sh && rm -r /tmp/*
 
 # Start Seanime
-CMD ["bash", "-c", "./run-tailscale.sh && ./seanime --datadir /app/config/Seanime"]
+CMD ["bash", "-c", "/app/run-tailscale.sh && ./seanime --datadir /app/config/Seanime"]

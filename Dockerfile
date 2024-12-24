@@ -26,13 +26,19 @@ WORKDIR /app/
 RUN mkdir /downloads
 
 # Download and install latest version
-RUN LATEST_VERSION=$(curl -s https://api.github.com/repos/5rahim/seanime/releases/latest | jq -r .tag_name) && \
-    VERSION_NO_V=$(echo ${LATEST_VERSION} | sed 's/v//') && \
-    echo "Latest version: ${LATEST_VERSION}" && \
-    echo "Version without v: ${VERSION_NO_V}" && \
-    wget "https://github.com/5rahim/seanime/releases/download/${LATEST_VERSION}/seanime-${VERSION_NO_V}_Linux_x86_64.tar.gz" && \
-    tar -xzf "seanime-${VERSION_NO_V}_Linux_x86_64.tar.gz" && \
-    rm "seanime-${VERSION_NO_V}_Linux_x86_64.tar.gz" && \
+#RUN LATEST_VERSION=$(curl -s https://api.github.com/repos/5rahim/seanime/releases/latest | jq -r .tag_name) && \
+#    VERSION_NO_V=$(echo ${LATEST_VERSION} | sed 's/v//') && \
+#    echo "Latest version: ${LATEST_VERSION}" && \
+#    echo "Version without v: ${VERSION_NO_V}" && \
+#    wget "https://github.com/5rahim/seanime/releases/download/${LATEST_VERSION}/seanime-${VERSION_NO_V}_Linux_x86_64.tar.gz" && \
+#    tar -xzf "seanime-${VERSION_NO_V}_Linux_x86_64.tar.gz" && \
+#    rm "seanime-${VERSION_NO_V}_Linux_x86_64.tar.gz" && \
+#    chmod +x seanime
+
+# Install Seanime
+RUN wget "https://github.com/5rahim/seanime/releases/download/v2.5.1/seanime-2.5.1_Linux_x86_64.tar.gz" && \
+    tar -xzf "seanime-2.5.1_Linux_x86_64.tar.gz" && \
+    rm "seanime-2.5.1_Linux_x86_64.tar.gz" && \
     chmod +x seanime
 
 ENV PATH="/usr/lib/jellyfin-ffmpeg/:$PATH"

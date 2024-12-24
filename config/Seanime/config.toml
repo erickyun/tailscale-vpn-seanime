@@ -21,7 +21,7 @@ assetdir = '$SEANIME_DATA_DIR/offline/assets'
 dir = '$SEANIME_DATA_DIR/offline'
 
 [server]
-host = '127.0.0.1'
+host = '0.0.0.0'
 offline = false
 port = 43211
 usebinarypath = true

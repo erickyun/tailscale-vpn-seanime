@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim
 #FROM debian:latest
-FROM python:3.9-slim
+#FROM python:3.9-slim
 
 # Install necessary packages
 RUN apt-get update && \
@@ -74,7 +74,18 @@ RUN pwd
 #COPY install-tailscale.sh /tmp
 #RUN /tmp/install-tailscale.sh && rm -r /tmp/*
 
-COPY ./app/requirements.txt /app/app/
+# Install Python, pip, and necessary build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    build-essential \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Set Python3 and pip3 as the default Python and pip commands
+RUN ln -s /usr/bin/python3 /usr/bin/python && \
+    ln -s /usr/bin/pip3 /usr/bin/pip
+
+#COPY ./app/requirements.txt /app/app/
 RUN pip install --no-cache-dir -r /app/app/requirements.txt
 
 RUN wget https://pkgs.tailscale.com/stable/$(wget -q -O- https://pkgs.tailscale.com/stable/ | grep 'amd64.tgz' | cut -d '"' -f 2) && \

@@ -1,5 +1,6 @@
 FROM debian:bullseye-slim
 #FROM debian:latest
+FROM python:3.9-slim
 
 # Install necessary packages
 RUN apt-get update && \

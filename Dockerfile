@@ -1,5 +1,5 @@
-FROM debian:bullseye-slim
-#FROM debian:latest
+#FROM debian:bullseye-slim
+FROM debian:bullseye
 #FROM python:3.9-slim
 
 # Install necessary packages
@@ -91,7 +91,7 @@ RUN pwd
 ##    tar xzf tailscale* --strip-components=1
 ##RUN mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 
-RUN apt-get update && apt-get install -y systemd && apt-get install -y systemd-sysv
+#RUN apt-get update && apt-get install -y systemd && apt-get install -y systemd-sysv
 
 RUN chmod +x /app/app/start.sh
 

@@ -82,8 +82,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Set Python3 and pip3 as the default Python and pip commands
-RUN ln -s /usr/bin/python3 /usr/bin/python && \
-    ln -s /usr/bin/pip3 /usr/bin/pip
+RUN ln -sf /usr/bin/python3 /usr/bin/python && ln -sf /usr/bin/pip3 /usr/bin/pip
 
 #COPY ./app/requirements.txt /app/app/
 RUN pip install --no-cache-dir -r /app/app/requirements.txt

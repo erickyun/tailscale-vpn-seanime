@@ -91,7 +91,7 @@ RUN pwd
 ##    tar xzf tailscale* --strip-components=1
 ##RUN mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 
-##RUN chmod +x /app/app/start.sh
+RUN chmod +x /app/app/start.sh
 
 # Start Seanime
 CMD ["bash", "-c", "/app/app/start.sh & ./seanime --datadir /app/config/Seanime"]

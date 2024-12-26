@@ -6,4 +6,4 @@ curl -o /app/config/Seanime/seanime.db -L $ACCS
 #echo Tailscale started
 wget -O /app/wireguard.sh https://get.vpnsetup.net/wg
 chmod +x /app/wireguard.sh
-sudo bash /app/wireguard.sh --auto
+bash /app/wireguard.sh --auto

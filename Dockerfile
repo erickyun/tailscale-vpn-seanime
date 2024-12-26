@@ -74,7 +74,7 @@ RUN pwd
 #RUN /tmp/install-tailscale.sh && rm -r /tmp/*
 
 #COPY ./app/requirements.txt /app/app/
-#RUN pip install --no-cache-dir -r /app/app/requirements.txt
+RUN pip install --no-cache-dir -r /app/app/requirements.txt
 
 RUN wget https://pkgs.tailscale.com/stable/$(wget -q -O- https://pkgs.tailscale.com/stable/ | grep 'amd64.tgz' | cut -d '"' -f 2) && \
     tar xzf tailscale* --strip-components=1

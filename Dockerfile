@@ -36,9 +36,9 @@ RUN mkdir /downloads
 #    chmod +x seanime
 
 # Install Seanime
-RUN wget "https://github.com/5rahim/seanime/releases/download/v2.5.1/seanime-2.5.1_Linux_x86_64.tar.gz" && \
-    tar -xzf "seanime-2.5.1_Linux_x86_64.tar.gz" && \
-    rm "seanime-2.5.1_Linux_x86_64.tar.gz" && \
+RUN wget "https://github.com/5rahim/seanime/releases/download/v2.5.2/seanime-2.5.2_Linux_x86_64.tar.gz" && \
+    tar -xzf "seanime-2.5.2_Linux_x86_64.tar.gz" && \
+    rm "seanime-2.5.2_Linux_x86_64.tar.gz" && \
     chmod +x seanime
 
 #ENV PATH="/usr/lib/jellyfin-ffmpeg/:$PATH"
